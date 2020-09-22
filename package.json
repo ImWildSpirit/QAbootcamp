@@ -1,0 +1,24 @@
+{
+  "name": "qabootcamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ImWildSpirit/QAbootcamp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ImWildSpirit/QAbootcamp/issues"
+  },
+  "homepage": "https://github.com/ImWildSpirit/QAbootcamp#readme",
+  "dependencies": {
+    "jest": "^26.4.2",
+    "playwright-chromium": "^1.4.1"
+  }
+}
