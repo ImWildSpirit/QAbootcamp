@@ -4,4 +4,5 @@
 
 Скриншоты на ДЗ по добавлению багов в Jira:
 ![Доска спринта](https://raw.githubusercontent.com/ImWildSpirit/QAbootcamp/master/Screenshots/JIRA%20desk.jpg)
-
+![Баг №1](https://raw.githubusercontent.com/ImWildSpirit/QAbootcamp/master/Screenshots/JIRA%20bug1.jpg)
+![Баг №2](https://raw.githubusercontent.com/ImWildSpirit/QAbootcamp/master/Screenshots/JIRA%20bug2.jpg)
