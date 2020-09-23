@@ -1,8 +1,7 @@
 const playwright = require('playwright-chromium');
 
 jest.setTimeout(60000);
-let browser;
-let context;
+let browser, context, page;
 
 beforeAll(async()=>{
   browser = await playwright.chromium.launch({
@@ -10,7 +9,7 @@ beforeAll(async()=>{
   })
 });
 
-afterEach(async()=>{
+afterEach(async() => {
   await context.close();
 });
 
@@ -18,8 +17,7 @@ afterAll(async () => {
   await browser.close();
 });
 
-describe("Homework tests", () =>{
-    let page;
+describe("Homework tests", () => {
     test('homework1 - iframe', async() => {
       
       context = await browser.newContext();
@@ -46,7 +44,7 @@ describe("Homework tests", () =>{
 
     //Assertion
     await page.waitForSelector('text = 649210');
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(1000);
   });
   
   test("homework3 - bitaps BTC address search", async() => {
@@ -61,7 +59,7 @@ describe("Homework tests", () =>{
 
     //Assertion
     await page.waitForSelector('[href="/1Krd6pVawBzzydPm5BnrQPtBQsZ7z1HU8d"]');
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(1000);
   });
 
   test("homework4 - search transaction ID", async() => {
@@ -77,7 +75,7 @@ describe("Homework tests", () =>{
     //Assertion
     //Witness ID
     await page.waitForSelector('text=46e07d6daa0cc7e36840d67571c7c3d3d88f9368a37144d51646be6d75b5d389');
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(1000);
   });
   
   test("homework5 - day/night mode", async() => {
