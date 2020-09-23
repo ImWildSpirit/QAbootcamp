@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "f1996439-d2a6-48f1-b918-5146e920d648",
+		"name": "QA bootcamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create wallet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "49896891-fe38-4131-bd44-34878123acaf",
+						"exec": [
+							"let responseJson;\r",
+							"\r",
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body data\", function(){\r",
+							"    responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.have.property(\"wallet_id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{root}}/create/wallet",
+					"host": [
+						"{{root}}"
+					],
+					"path": [
+						"create",
+						"wallet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create wallet payment address",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"wallet_id\":\"BTCupWNRrwsQgxSt6LfkWsxSKpQgyZpvTPWeLRdVsL4wyYBFPeGPt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{root}}/create/wallet/payment/address",
+					"host": [
+						"{{root}}"
+					],
+					"path": [
+						"create",
+						"wallet",
+						"payment",
+						"address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet state",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "01fcaff6-f3a0-4efa-8eea-4964c63c3368",
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"BTC\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{root}}/wallet/state/{{wallet_id}}",
+					"host": [
+						"{{root}}"
+					],
+					"path": [
+						"wallet",
+						"state",
+						"{{wallet_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Daily wallet statistics",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "17063561-02d1-4d6e-a0ef-12e1d2f37500",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"day_list\": []');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{root}}/wallet/daily/statistic/{{wallet_id}}?limit=5&page=1&from={{start_date}}&to={{end_date}}",
+					"host": [
+						"{{root}}"
+					],
+					"path": [
+						"wallet",
+						"daily",
+						"statistic",
+						"{{wallet_id}}"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "from",
+							"value": "{{start_date}}"
+						},
+						{
+							"key": "to",
+							"value": "{{end_date}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet transactions list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b12e1255-9b95-4e6f-9504-9217b9dd0e6d",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{root}}/wallet/transactions/{{wallet_id}}?from={{start_date}}&to={{end_date}}&limit=5&page=1",
+					"host": [
+						"{{root}}"
+					],
+					"path": [
+						"wallet",
+						"transactions",
+						"{{wallet_id}}"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "{{start_date}}"
+						},
+						{
+							"key": "to",
+							"value": "{{end_date}}"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet address transactions list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b1d6b22b-98da-40aa-82bb-5aba44d356fc",
+						"exec": [
+							"pm.test(\"Response must be valid and have a body\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{root}}/wallet/address/transactions/{{wallet_id}}/34qrJsSiSenCP93cVXw6V9SvZvWiWwWexa",
+					"host": [
+						"{{root}}"
+					],
+					"path": [
+						"wallet",
+						"address",
+						"transactions",
+						"{{wallet_id}}",
+						"34qrJsSiSenCP93cVXw6V9SvZvWiWwWexa"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "0b6e7649-e708-4c06-8bd8-254b7132fafd",
+			"key": "root",
+			"value": "https://api.bitaps.com/btc/v1"
+		},
+		{
+			"id": "4fc25fd3-ac9c-4ae1-840d-bc5c94624e44",
+			"key": "start_date",
+			"value": "1600538400"
+		},
+		{
+			"id": "9958f218-8d6e-4b93-a229-6a690827974f",
+			"key": "end_date",
+			"value": "1600603200"
+		},
+		{
+			"id": "6daa5aab-3bff-4fca-898c-3762953fd374",
+			"key": "end_date",
+			"value": ""
+		},
+		{
+			"id": "43fbca95-b683-4096-99f5-fb84740a6d39",
+			"key": "wallet_hash",
+			"value": ""
+		},
+		{
+			"id": "c06d15d9-8e1c-43ed-8598-6abaf2438308",
+			"key": "hash",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
